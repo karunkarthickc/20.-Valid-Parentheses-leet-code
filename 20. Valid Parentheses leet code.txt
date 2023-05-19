@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isValid(String s) {
+        if(s.length()%2!=0){ //if length of string is odd it is invalid 
+return false;
+        }
+        Stack<Character>stack=new Stack(); //create a empty stack of char type
+        for(char c:s.toCharArray()){
+            if(c=='{'||c=='('||c=='['){ //if char is open paranthesis push it in stack
+                stack.push(c);
+            }
+            
+            else if(c==')' && !stack.isEmpty() && stack.peek()=='('){ /* if c is closed paranthesis check whether the stack is not empty and the peek element should be equal to c then pop out the last element*/
+                stack.pop();
+            }
+             else if(c=='}' && !stack.isEmpty() && stack.peek()=='{'){
+                stack.pop();
+            }
+             else if(c==']' && !stack.isEmpty() && stack.peek()=='['){
+                stack.pop();
+            }
+            else{
+                return false;
+            }
+        }
+           return stack.isEmpty(); //if the stack is empty the parenthesis is valid
+    }
+}
